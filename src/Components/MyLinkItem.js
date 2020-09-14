@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import {useOvermind} from "../Others/OvermindHelper";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
+import {SavedDataManager} from "../Others/Globals";
 
 const MyLinkItem = (props) => {
     const {item, index} = props;
@@ -15,6 +16,7 @@ const MyLinkItem = (props) => {
                 onClick={() => {
                     if (state.isModeDelete) {
                         actions.deleteUrl(index)
+                        SavedDataManager.saveUrls(state)
                     } else {
                         window.open(item?.link, '_blank');
                     }

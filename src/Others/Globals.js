@@ -36,6 +36,17 @@ export class Globals {
     }
 }
 
-export class Constants {
+export class SavedDataManager {
     static  local_json = "local_json"
+
+    static getUrls() {
+        var jsonStr = localStorage.getItem(SavedDataManager.local_json);
+        if (jsonStr) {
+            return JSON.parse(jsonStr)
+        } else return []
+    }
+
+    static saveUrls(state) {
+        localStorage.setItem(SavedDataManager.local_json, JSON.stringify(state.urls))
+    }
 }

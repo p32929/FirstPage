@@ -1,24 +1,20 @@
 import React, {useEffect} from 'react';
 import Grid from "@material-ui/core/Grid";
 import {useOvermind} from "../Others/OvermindHelper";
-import {Constants, Globals} from "../Others/Globals";
+import {Globals, SavedDataManager} from "../Others/Globals";
 import MyLinkItem from "./MyLinkItem";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
+import Typography from "@material-ui/core/Typography";
 
 const FirstPage = (props) => {
     const {state, actions} = useOvermind()
     useEffect(() => {
-        var jsonStr = localStorage.getItem(Constants.local_json);
-        console.log(jsonStr)
-        if (jsonStr) {
-            actions.setUrls(JSON.parse(jsonStr))
-        }
+        actions.setUrls(SavedDataManager.getUrls())
     }, [])
 
     return (
@@ -32,7 +28,6 @@ const FirstPage = (props) => {
                     })
                 }
             </Grid>
-
             <Grid>
                 <Button onClick={() => {
                     actions.showDialog(true)
@@ -71,9 +66,7 @@ const FirstPage = (props) => {
                             title: title,
                             link: link,
                         })
-
-                        localStorage.setItem(Constants.local_json, JSON.stringify(state.urls))
-
+                        SavedDataManager.saveUrls(state)
                         actions.showDialog(false)
                     }} color="primary" autoFocus>
                         Add
