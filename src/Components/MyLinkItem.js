@@ -10,7 +10,7 @@ const MyLinkItem = (props) => {
     const {state, actions} = useOvermind()
 
     return (
-        <Grid item xs={3}>
+        <Grid item item xs={12} sm={12} md={4} lg={4} xl={4}>
             <Button
                 // target="_blank" href={item?.link}
                 onClick={() => {
