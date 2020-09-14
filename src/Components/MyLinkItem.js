@@ -18,7 +18,7 @@ const MyLinkItem = (props) => {
                         actions.deleteUrl(index)
                         SavedDataManager.saveUrls(state)
                     } else {
-                        window.open(item?.link);
+                        window.open(item?.link, '_self');
                         // window.open(item?.link, '_blank');
                     }
                 }} style={{ width: '100%' }} color='primary'
